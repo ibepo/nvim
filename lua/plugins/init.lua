@@ -43,7 +43,7 @@ return require("packer").startup(function(use)
     })
     use({
         "goolord/alpha-nvim",
-        config = "require('plugins.configs.alpha')"
+        config = "require('plugins.configs.alpha2')"
     })
     -- [ colorscheme ]--
     use("EdenEast/nightfox.nvim")

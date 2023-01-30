@@ -1,5 +1,10 @@
-local opts = { noremap = true, silent = true }
-local term_opts = { silent = true }
+local opts = {
+    noremap = true,
+    silent = true
+}
+local term_opts = {
+    silent = true
+}
 local keymap = vim.api.nvim_set_keymap
 
 -- Remap space as leader key
@@ -17,7 +22,7 @@ vim.g.mapleader = " "
 -- Better to save file & exit file --
 -- keymap("n", "Q", ":q<CR>", opts)
 -- keymap("n", "S", ":w<CR>", opts)
-keymap("n","<leader>w",":w<CR>", opts)
+keymap("n", "<leader>w", ":w<CR>", opts)
 
 -- 'jk' key to exit insert mode --
 keymap("i", "jk", "<Esc>", opts)
@@ -33,8 +38,7 @@ keymap("n", "<TAB>", ":bnext<CR>", opts)
 keymap("n", "<S-TAB>", ":bprevious<CR>", opts)
 
 -- nvim-tree(toggle & focus) --
-keymap("n", "tt", ":NvimTreeToggle<CR>", opts)
--- keymap("n", "<leader>e", ":NvimTreeFocus<CR>", opts)
+keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
 -- Stay in indent mode --
 keymap("v", "<", "<gv", opts)
@@ -80,16 +84,16 @@ keymap("n", "N", "Nzz", opts)
 keymap("n", "mp", ":MarkdownPreview<CR>", opts)
 
 -- open telscope --
-keymap("n", "<Leader>e", ":Telescope<CR>", opts)
+-- keymap("n", "<Leader>e", ":Telescope<CR>", opts)
 
 -- open or close trouble.nvim --
 keymap("n", "tr", ":TroubleToggle<CR>", opts)
 
 -- keymap("n", "tg", ":SymbolsOutline<CR>", opts)
---setup mapping to call :LazyGit
+-- setup mapping to call :LazyGit
 keymap("n", "<Leader>g", ":LazyGit<CR>", opts)
 
---debug
+-- debug
 keymap("n", "<F6>", ":lua require('dapui').toggle()<CR>", opts)
 keymap("n", "<C-b>", ":lua require'dap'.toggle_breakpoint()<CR>", opts)
 -- msic --
