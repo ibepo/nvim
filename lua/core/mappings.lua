@@ -1,9 +1,9 @@
 local opts = {
-    noremap = true,
-    silent = true
+	noremap = true,
+	silent = true,
 }
 local term_opts = {
-    silent = true
+	silent = true,
 }
 local keymap = vim.api.nvim_set_keymap
 
@@ -83,8 +83,8 @@ keymap("n", "N", "Nzz", opts)
 -- Markdown preview --
 keymap("n", "mp", ":MarkdownPreview<CR>", opts)
 
--- open telscope --
--- keymap("n", "<Leader>e", ":Telescope<CR>", opts)
+--  telscope -
+keymap("n", "<leader>t", ":Telescope find_files<CR>", opts)
 
 -- open or close trouble.nvim --
 keymap("n", "tr", ":TroubleToggle<CR>", opts)
