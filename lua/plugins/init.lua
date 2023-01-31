@@ -43,7 +43,7 @@ return require("packer").startup(function(use)
     })
     use({
         "goolord/alpha-nvim",
-        config = "require('plugins.configs.alpha2')"
+        config = "require('plugins.configs.alpha')"
     })
     -- [ colorscheme ]--
     use("EdenEast/nightfox.nvim")
@@ -124,13 +124,6 @@ return require("packer").startup(function(use)
         config = "require('plugins.configs.lspsaga')",
         branch = "main"
     })
-    -- use({"glepnir/lspsaga.nvim",
-    --   branch = "main",
-    --   config = function()
-    --       require("lspsaga").setup({})
-    --   end,
-    --   requires = { {"nvim-tree/nvim-web-devicons"} }
-    --  })
 
     -- [ debug ]--
     use({
@@ -154,10 +147,10 @@ return require("packer").startup(function(use)
         config = "require('plugins.configs.autopairs')",
         after = "nvim-cmp"
     })
-    use({
-        "gentoo/gentoo-syntax",
-        ft = {"ebuild"}
-    })
+    -- use({
+    --     "gentoo/gentoo-syntax",
+    --     ft = {"ebuild"}
+    -- })
     -- [  Smart and Powerful commenting plugin for neovim ]--
     use({
         "numToStr/Comment.nvim",

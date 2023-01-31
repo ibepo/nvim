@@ -1,9 +1,9 @@
 local opts = {
-	noremap = true,
-	silent = true,
+    noremap = true,
+    silent = true
 }
 local term_opts = {
-	silent = true,
+    silent = true
 }
 local keymap = vim.api.nvim_set_keymap
 
@@ -19,11 +19,6 @@ vim.g.mapleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
--- Better to save file & exit file --
--- keymap("n", "Q", ":q<CR>", opts)
--- keymap("n", "S", ":w<CR>", opts)
-keymap("n", "<leader>w", ":w<CR>", opts)
-
 -- 'jk' key to exit insert mode --
 keymap("i", "jk", "<Esc>", opts)
 
@@ -38,7 +33,18 @@ keymap("n", "<TAB>", ":bnext<CR>", opts)
 keymap("n", "<S-TAB>", ":bprevious<CR>", opts)
 
 -- nvim-tree(toggle & focus) --
+-- FileExpolre
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
+keymap("n", "<leader>f", ":NvimTreeFindFile<CR>", opts)
+
+-- Better to save file & exit file --
+-- keymap("n", "Q", ":q<CR>", opts)
+-- keymap("n", "S", ":w<CR>", opts)
+keymap("n", "<leader>w", ":w<CR>", opts)
+keymap("n", "<leader>q", ":q<CR>", opts)
+
+-- no highlight
+keymap("n", "<leader>l", ":nohl<cr>", opts)
 
 -- Stay in indent mode --
 keymap("v", "<", "<gv", opts)
