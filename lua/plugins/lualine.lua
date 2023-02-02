@@ -12,8 +12,8 @@ local diagnostics = {
     sources = {"nvim_diagnostic"},
     sections = {"error", "warn"},
     symbols = {
-        error = "👺 ",
-        warn = "👻 "
+        error = "x",
+        warn = "i"
     },
     colored = false,
     always_visible = false
@@ -48,8 +48,7 @@ lualine.setup {
     options = {
         globalstatus = true,
         icons_enabled = true,
-        theme = "auto",
-        -- theme = "horizon",
+        theme = "catppuccin",
         component_separators = {
             left = "",
             right = ""

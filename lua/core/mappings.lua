@@ -1,16 +1,3 @@
-local opts = {
-    noremap = true,
-    silent = true
-}
-local term_opts = {
-    silent = true
-}
-local keymap = vim.api.nvim_set_keymap
-
--- Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
-vim.g.mapleader = " "
-
 -- Modes
 --   normal_mode = "n",
 --   insert_mode = "i",
@@ -19,8 +6,28 @@ vim.g.mapleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
+local opts = {
+	noremap = true,
+	silent = true,
+}
+local term_opts = {
+	silent = true,
+}
+local keymap = vim.api.nvim_set_keymap
+
+-- Remap space as leader key
+keymap("", "<Space>", "<Nop>", opts)
+vim.g.mapleader = " "
+
+--按屏幕行移动
+keymap("n", "j", "gj", opts)
+keymap("n", "k", "gk", opts)
+keymap("n", "gj", "j", opts)
+keymap("n", "gk", "k", opts)
+
 -- 'jk' key to exit insert mode --
 keymap("i", "jk", "<Esc>", opts)
+keymap("n", "o", "$a<cr><esc>", opts)
 
 -- Better window navigation --
 keymap("n", "<C-h>", "<C-w>h", opts)
