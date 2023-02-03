@@ -52,6 +52,7 @@ return require("packer").startup(function(use)
     use 'akinsho/bufferline.nvim'
     use 'kyazdani42/nvim-tree.lua'
 
+    use "lukas-reineke/indent-blankline.nvim"
     -- use({
     --     "rafamadriz/friendly-snippets",
     --     event = "InsertEnter"
@@ -110,7 +111,7 @@ return require("packer").startup(function(use)
     --         require("dap-go").setup()
     --     end
     -- })
-    -- use({"gcmt/wildfire.vim"})
+    --    use({"gcmt/wildfire.vim"})
     -- use({
     --     "j-hui/fidget.nvim",
     --     config = function()
@@ -123,55 +124,24 @@ return require("packer").startup(function(use)
     -- use({
     --     "windwp/nvim-autopairs",
     --     event = "InsertEnter",
-    --     config = "require('plugins.configs.autopairs')",
     --     after = "nvim-cmp"
     -- })
-    -- -- [  Smart and Powerful commenting plugin for neovim ]--
-    -- use({
-    --     "numToStr/Comment.nvim",
-    --     config = "require('plugins.configs.comment')",
-    --     event = "BufReadPost"
-    -- })
-    -- -- For example, Vue files can have many different sections, each of which can have a different style for comments --
-    -- -- use("JoosepAlviste/nvim-ts-context-commentstring")
-    -- -- [ File explorer ]--
-    -- -- [ An implementation of the Popup API from vim in Neovim ]--
-    -- use({"nvim-lua/popup.nvim"})
-    -- -- [ Indent Blankline ]--
-    -- use({
-    --     "lukas-reineke/indent-blankline.nvim",
-    --     config = "require('plugins.configs.indent-blankline')"
-    -- })
-    -- -- [ Neovim Treesitter configurations and abstraction layer ]--
-    -- use({
-    --     "nvim-treesitter/nvim-treesitter",
-    --     config = "require('plugins.configs.treesitter')",
-    --     run = ":TSUpdate",
-    --     event = "BufRead"
-    -- })
-    -- use({"p00f/nvim-ts-rainbow"})
-    -- -- [ Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML tags, and more. The plugin provides mappings to easily delete, change and add such surroundings in pairs.It's easiest to explain with examples. Press cs"' inside ]--
-    -- use({
-    --     "tpope/vim-surround",
-    --     event = "BufReadPost"
-    -- })
+    use({"nvim-lua/popup.nvim"})
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+    }
+    use 'nvim-treesitter/nvim-treesitter-textobjects'
+    use "tpope/vim-surround"
+    use "numToStr/Comment.nvim"
+    use 'JoosepAlviste/nvim-ts-context-commentstring'
+
     -- -- [ History modification record ]--
     -- use({
     --     "mbbill/undotree",
     --     event = "InsertEnter"
     -- })
-    -- -- [ Markdown preview ]--
-    -- use({
-    --     "iamcco/markdown-preview.nvim",
-    --     run = "cd app && npm install",
-    --     setup = function()
-    --         vim.g.mkdp_filetypes = {"markdown"}
-    --     end,
-    --     ft = {"markdown"}
-    -- })
-    -- -- [ A fast and lua alternative to filetype.vim. It is ~175x faster than filetype.vim ]--
     -- use({"nathom/filetype.nvim"})
-    -- -- [ A pretty list for showing diagnostics, references, telescope results, quickfix and location lists to help you solve all the trouble your code is causing.]--
     -- use({
     --     "folke/trouble.nvim",
     --     cmd = "TroubleToggle",
@@ -194,17 +164,15 @@ return require("packer").startup(function(use)
     --     cmd = {"DiffviewOpen", "DiffviewClose", "DiffviewRefresh", "DiffviewFocusFiles", "DiffviewToggleFiles",
     --            "DiffviewFileHistory"}
     -- })
-    -- -- [ highly extendable fuzzy finder over lists]--
-    -- use({
-    --     "nvim-telescope/telescope.nvim",
-    --     cmd = "Telescope",use "nvim-lua/plenary.nvim"pe/telescope-media-files.nvim",
-    --     config = "require('plugins.configs.telescope')"
-    -- })
-    -- -- Plugin for calling lazygit from within neovim
-    -- use({
-    --     "kdheepak/lazygit.nvim",
-    --     cmd = "LazyGit"
-    -- })
+    use 'nvim-telescope/telescope-media-files.nvim'
+    use({
+        "nvim-telescope/telescope.nvim",
+        cmd = "Telescope"
+    })
+    use({
+        "kdheepak/lazygit.nvim",
+        cmd = "LazyGit"
+    })
     -- -- A neovim plugin to persist and toggle multiple terminals during an editing session--
     -- use({
     --     "akinsho/toggleterm.nvim",
@@ -217,11 +185,6 @@ return require("packer").startup(function(use)
     -- 	cmd = { "DBUI" },
     -- 	required = { "tpope/vim-dadbod" },
     -- })
-    ------------------
-    -- Add Plug End --
-    ------------------
-    -- Automatically set up your configuration after cloning packer.nvim
-    -- Put this at the end after all plugins
 
     if packer_bootstrap then
         require("packer").sync()

@@ -43,6 +43,7 @@ keymap("n", "<S-TAB>", ":bprevious<CR>", opts)
 -- FileExpolre
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 keymap("n", "<leader>f", ":NvimTreeFindFile<CR>", opts)
+keymap("n", "<leader>i", ":PackerSync<CR>", opts)
 
 -- Better to save file & exit file --
 -- keymap("n", "Q", ":q<CR>", opts)
