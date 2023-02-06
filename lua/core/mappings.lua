@@ -5,13 +5,12 @@
 --   visual_block_mode = "x",
 --   term_mode = "t",
 --   command_mode = "c",
-
 local opts = {
-	noremap = true,
-	silent = true,
+    noremap = true,
+    silent = true
 }
 local term_opts = {
-	silent = true,
+    silent = true
 }
 local keymap = vim.api.nvim_set_keymap
 
@@ -19,7 +18,7 @@ local keymap = vim.api.nvim_set_keymap
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 
---按屏幕行移动
+-- 按屏幕行移动
 keymap("n", "j", "gj", opts)
 keymap("n", "k", "gk", opts)
 keymap("n", "gj", "j", opts)
@@ -64,8 +63,10 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("v", "J", ":move '>+1<CR>gv-gv", opts)
 keymap("v", "K", ":move '<-2<CR>gv-gv", opts)
 
--- Better split screen --
+--|s| could be easily replaced by |c|l| commands.
 keymap("", "s", "<Nop>", opts)
+
+-- Better split screen -
 keymap("n", "sl", ":set splitright<CR>:vsplit<CR>", opts)
 keymap("n", "sh", ":set nosplitright<CR>:vsplit<CR>", opts)
 keymap("n", "sk", ":set nosplitbelow<CR>:split<CR>", opts)

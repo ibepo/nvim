@@ -21,5 +21,6 @@ vim.cmd("set foldexpr=nvim_treesitter#foldexpr()")
 -- vim.cmd([[autocmd BufWritePre *.go :silent! lua vim.lsp.buf.format()]])
 
 vim.cmd([[autocmd FileType go nnoremap <buffer> <F5> :TermExec cmd="go run main.go" <CR>]])
+
 -- vim.cmd [[colorscheme tokyonight-moon]]
 -- vim.cmd("colorscheme nightfox")

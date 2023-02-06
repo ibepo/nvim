@@ -1,4 +1,3 @@
--- 自动安装packer插件
 local ensure_packer = function()
     local fn = vim.fn
     local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -11,6 +10,7 @@ local ensure_packer = function()
 end
 
 local packer_bootstrap = ensure_packer()
+
 ---添加新插件后自动同步
 vim.cmd([[
  augroup packer_user_config
@@ -24,7 +24,7 @@ if not status_ok then
     return
 end
 
--- 浮动UI 
+-- 浮动UI
 packer.init({
     display = {
         open_fn = function()
@@ -39,66 +39,62 @@ packer.init({
 return require("packer").startup(function(use)
     use("wbthomason/packer.nvim")
     use({"lewis6991/impatient.nvim"})
+
+    -- theme
     use("EdenEast/nightfox.nvim")
-    use 'folke/tokyonight.nvim'
-    use {
+    use("folke/tokyonight.nvim")
+    use({
         "catppuccin/nvim",
         as = "catppuccin"
-    }
-    use 'kyazdani42/nvim-web-devicons'
-    use "nvim-lua/plenary.nvim"
-    use 'goolord/alpha-nvim'
-    use 'nvim-lualine/lualine.nvim'
-    use 'akinsho/bufferline.nvim'
-    use 'kyazdani42/nvim-tree.lua'
+    })
 
-    use "lukas-reineke/indent-blankline.nvim"
-    -- use({
-    --     "rafamadriz/friendly-snippets",
-    --     event = "InsertEnter"
-    -- })
-    -- use({
-    --     "hrsh7th/nvim-cmp",
-    --     config = "require('plugins.configs.cmp')",
-    --     after = "friendly-snippets"
-    -- })
-    -- use({
-    --     "L3MON4D3/LuaSnip",
-    --     after = "nvim-cmp"
-    -- })
-    -- use({
-    --     "saadparwaiz1/cmp_luasnip",
-    --     after = "LuaSnip"
-    -- })
-    -- use({
-    --     "hrsh7th/cmp-nvim-lsp",
-    --     after = "cmp_luasnip"
-    -- })
-    -- use({
-    --     "hrsh7th/cmp-nvim-lua",
-    --     after = "cmp-nvim-lsp"
-    -- })
-    -- use({
-    --     "hrsh7th/cmp-buffer",
-    --     after = "cmp-nvim-lua"
-    -- })
-    -- use({
-    --     "hrsh7th/cmp-path",
-    --     after = "cmp-buffer"
-    -- })
-    -- use({
-    --     "hrsh7th/cmp-cmdline",
-    --     after = "cmp-path"
-    -- })
+    -- greeter,bufferline,statuline,fileExplore,indent
+    use("kyazdani42/nvim-web-devicons")
+    use("nvim-lua/plenary.nvim")
+    use("goolord/alpha-nvim")
+    use("nvim-lualine/lualine.nvim")
+    use("akinsho/bufferline.nvim")
+    use("kyazdani42/nvim-tree.lua")
+    use("lukas-reineke/indent-blankline.nvim")
 
-    -- use({"neovim/nvim-lspconfig"})
-    -- use({"williamboman/nvim-lsp-installer"})
-    -- use({
-    --     "glepnir/lspsaga.nvim",
-    --     branch = "main"
-    -- })
+    -- autocompletion
+    use("hrsh7th/nvim-cmp") -- completion plugin
+    use("hrsh7th/cmp-buffer") -- source for text in buffer
+    use("hrsh7th/cmp-path") -- source for file system paths
+    use("hrsh7th/cmp-cmdline")
+    use("hrsh7th/cmp-nvim-lsp")
+    use("hrsh7th/cmp-nvim-lua")
 
-    -- -- [ debug ]--
+    -- snippets
+    use("L3MON4D3/LuaSnip") -- snippet engine
+    use("saadparwaiz1/cmp_luasnip") -- for autocompletion
+    use("rafamadriz/friendly-snippets") -- useful snippets
+
+    -- lsp
+    -- managing & installing lsp servers, linters & formatters
+    use {"williamboman/mason.nvim"}
+    use {"williamboman/mason-lspconfig.nvim"} -- bridges gap b/w mason & lspconfig
+    -- configuring lsp servers
+    use("neovim/nvim-lspconfig")
+    use("williamboman/nvim-lsp-installer")
+    use({
+        "glepnir/lspsaga.nvim",
+        branch = "main"
+    })
+    use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
+    use({
+        "j-hui/fidget.nvim",
+        config = function()
+            require("fidget").setup()
+        end
+    })
+    -- formatting & linting
+    use({"jose-elias-alvarez/null-ls.nvim"})
+    use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
+
+    use({"folke/trouble.nvim"})
+
+    -- deug
     -- use({
     --     "rcarriga/nvim-dap-ui",
     --     requires = {"mfussenegger/nvim-dap"},
@@ -111,30 +107,25 @@ return require("packer").startup(function(use)
     --         require("dap-go").setup()
     --     end
     -- })
-    --    use({"gcmt/wildfire.vim"})
-    -- use({
-    --     "j-hui/fidget.nvim",
-    --     config = function()
-    --         require("fidget").setup()
-    --     end
-    -- })
-    -- -- [ format code ]--
-    -- use({"jose-elias-alvarez/null-ls.nvim"})
     -- -- [ A super powerful autopair plugin for Neovim that supports multiple characters. ]--
-    -- use({
-    --     "windwp/nvim-autopairs",
-    --     event = "InsertEnter",
-    --     after = "nvim-cmp"
-    -- })
+    use({
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        after = "nvim-cmp"
+    })
     use({"nvim-lua/popup.nvim"})
-    use {
-        'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate'
-    }
-    use 'nvim-treesitter/nvim-treesitter-textobjects'
-    use "tpope/vim-surround"
-    use "numToStr/Comment.nvim"
-    use 'JoosepAlviste/nvim-ts-context-commentstring'
+    use({
+        "nvim-treesitter/nvim-treesitter",
+        run = ":TSUpdate"
+    })
+    use("nvim-treesitter/nvim-treesitter-textobjects")
+    use("machakann/vim-sandwich")
+    -- use 'machakann/vim-highlightedyank'
+    -- use "tpope/vim-surround"
+    -- use "tpope/vim-repeat"
+
+    use("numToStr/Comment.nvim")
+    use("JoosepAlviste/nvim-ts-context-commentstring")
 
     -- -- [ History modification record ]--
     -- use({
@@ -142,14 +133,7 @@ return require("packer").startup(function(use)
     --     event = "InsertEnter"
     -- })
     -- use({"nathom/filetype.nvim"})
-    -- use({
-    --     "folke/trouble.nvim",
-    --     cmd = "TroubleToggle",
-    --     requires = "kyazdani42/nvim-web-devicons",
-    --     config = function()
-    --         require("trouble").setup({})
-    --     end
-    -- })
+
     -- -- Super fast git decorations implemented purely in lua/teal --
     -- use({
     --     "lewis6991/gitsigns.nvim",
@@ -164,7 +148,12 @@ return require("packer").startup(function(use)
     --     cmd = {"DiffviewOpen", "DiffviewClose", "DiffviewRefresh", "DiffviewFocusFiles", "DiffviewToggleFiles",
     --            "DiffviewFileHistory"}
     -- })
-    use 'nvim-telescope/telescope-media-files.nvim'
+
+    use({
+        "nvim-telescope/telescope-fzf-native.nvim",
+        run = "make"
+    })
+    use("nvim-telescope/telescope-media-files.nvim")
     use({
         "nvim-telescope/telescope.nvim",
         cmd = "Telescope"
