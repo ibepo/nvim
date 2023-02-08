@@ -1,12 +1,3 @@
-require("nvim-lsp-installer").setup({
-    -- Automatically download the LSP server set in advance
-    automatic_installation = true
-})
-
----------------------
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-
 local lsp_formatting = function(bufnr)
     vim.lsp.buf.format({
         filter = function(client)

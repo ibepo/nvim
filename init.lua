@@ -1,17 +1,25 @@
 require("plugins.plugins-setup")
-require("plugins.catppuccin")
+-- require("plugins.catppuccin")
+require("plugins.rose-pine")
 require("plugins.alpha")
 require("plugins.lualine")
 require("plugins.bufferline")
 require("plugins.nvim-tree")
-require("plugins.treesitter")
+require("plugins.harpoon")
+
 require("plugins.indent")
 require("plugins.autopairs")
+
+require("plugins.treesitter")
 require("plugins.comment2")
+
 require("plugins.telescope")
 require("plugins.cmp")
+
 require("plugins.lsp.mason")
 require("plugins.lsp.lsp")
 require("plugins.lsp.lspsaga")
 require("plugins.lsp.null-ls")
+require("plugins.gitsigns")
+-- require("plugins.diffview")
 require("core")

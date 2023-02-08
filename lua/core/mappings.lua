@@ -6,11 +6,11 @@
 --   term_mode = "t",
 --   command_mode = "c",
 local opts = {
-    noremap = true,
-    silent = true
+	noremap = true,
+	silent = true,
 }
 local term_opts = {
-    silent = true
+	silent = true,
 }
 local keymap = vim.api.nvim_set_keymap
 
@@ -63,7 +63,7 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("v", "J", ":move '>+1<CR>gv-gv", opts)
 keymap("v", "K", ":move '<-2<CR>gv-gv", opts)
 
---|s| could be easily replaced by |c|l| commands.
+-- |s| could be easily replaced by |c|l| commands.
 keymap("", "s", "<Nop>", opts)
 
 -- Better split screen -
@@ -99,14 +99,19 @@ keymap("n", "N", "Nzz", opts)
 keymap("n", "mp", ":MarkdownPreview<CR>", opts)
 
 --  telscope -
-keymap("n", "<leader>t", ":Telescope find_files<CR>", opts)
+keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
+keymap("n", "<leader>fg", ":Telescope live_grep<CR>", opts)
+keymap("n", "<leader>fh", ":Telescope help_tags<CR>", opts)
+keymap("n", "<leader>fi", ":Telescope git_files<CR>", opts)
+keymap("n", "<leader>fm", ":Telescope harpoon marks<CR>", opts)
 
--- open or close trouble.nvim --
-keymap("n", "tr", ":TroubleToggle<CR>", opts)
+-- trouble.nvim
+keymap("n", "<leader>tr", ":TroubleToggle<CR>", opts)
 
 -- keymap("n", "tg", ":SymbolsOutline<CR>", opts)
 -- setup mapping to call :LazyGit
 keymap("n", "<Leader>g", ":LazyGit<CR>", opts)
+keymap("n", "<Leader>u", ":UndotreeToggle<CR>", opts)
 
 -- debug
 keymap("n", "<F6>", ":lua require('dapui').toggle()<CR>", opts)
