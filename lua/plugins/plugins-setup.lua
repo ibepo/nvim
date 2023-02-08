@@ -142,8 +142,6 @@ return require("packer").startup(function(use)
 	use({ "lewis6991/gitsigns.nvim" })
 	use({
 		"sindrets/diffview.nvim",
-		config = "require('plugins.configs.diffview')",
-		requires = "nvim-lua/plenary.nvim",
 		cmd = {
 			"DiffviewOpen",
 			"DiffviewClose",
@@ -153,7 +151,6 @@ return require("packer").startup(function(use)
 			"DiffviewFileHistory",
 		},
 	})
-
 	-- telescope
 	use({
 		"nvim-telescope/telescope-fzf-native.nvim",
