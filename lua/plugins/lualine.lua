@@ -49,8 +49,8 @@ lualine.setup({
 	options = {
 		globalstatus = true,
 		icons_enabled = true,
-		-- theme = "catppuccin",
-		theme = "rose-pine",
+	    theme = "catppuccin",
+		-- theme = "rose-pine",
 		component_separators = {
 			left = "",
 			right = "",

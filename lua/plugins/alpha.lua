@@ -168,11 +168,12 @@ local buttons = {
     }, {
         type = "padding",
         val = 1
-    }, dashboard.button("e", "  New file", "<cmd>ene<CR>"), dashboard.button("SPC f", "  Find file"),
-           dashboard.button("SPC F", "  Live grep"), dashboard.button("SPC p", "  Projects"),
+    }, dashboard.button("e", "󰎔  New file", "<cmd>ene<CR>"),
+           dashboard.button("f", "󰀶  Find file", "<cmd>Telescope  find_files<cr>"),
+           dashboard.button("g", "󰑑  Live grep", "<cmd>Telescope live_grep <cr>"),
            dashboard.button("c", "  Configuration", "<cmd>e ~/.config/nvim/init.lua <CR>"),
-           dashboard.button("u", "  Update plugins", "<cmd>PackerSync<CR>"),
-           dashboard.button("q", "  Quit", "<cmd>qa<CR>")},
+           dashboard.button("l", "  mason_install_lsp", "<cmd>Mason<CR>"),
+           dashboard.button("u", "󰚰  Update plugins", "<cmd>PackerSync<CR>")},
     position = "center"
 }
 

@@ -8,7 +8,7 @@ local options = {
     shiftwidth = 4,
     tabstop = 4,
 
-    hlsearch = true,
+    hlsearch = false,
     incsearch = true,
     ignorecase = true,
     smartcase = true,
@@ -31,29 +31,34 @@ local options = {
     hidden = true,
     list = false,
 
-    undofile = true,
     showmode = false,
     showtabline = 2,
     smartindent = true,
     autoindent = true,
-    swapfile = false,
     cmdheight = 1,
-    updatetime = 50, -- faster completion (4000ms default)
+    updatetime = 50,
     foldenable = false,
-    foldlevel = 99
+    foldlevel = 99,
+
+    swapfile = false,
+    backup = false,
+    -- undodir = os.getenv("HOME") .. "~/.vim/undodir",
+    undofile = true
 }
 
 for k, v in pairs(options) do
     vim.opt[k] = v
 end
+
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
----- [[ Highlight on yank ]]
+-- Highlight on yank 
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', {
     clear = true
 })
+
 vim.api.nvim_create_autocmd('TextYankPost', {
     callback = function()
         vim.highlight.on_yank()
