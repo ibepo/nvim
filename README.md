@@ -1,4 +1,6 @@
 # nvim
+```shell
+
 .
 ├── init.lua
 ├── lua
@@ -32,3 +34,4 @@
 │       └── treesitter.lua
 └── plugin
     └── packer_compiled.lua
+```
