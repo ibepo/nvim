@@ -154,3 +154,6 @@ vim.keymap.set("n", "<leader>Y", "\"+Y",opts)
 
 -- Shorcut for searching and replacing (structure already written)
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>",opts)
+
+
+
