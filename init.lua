@@ -2,7 +2,7 @@ require("plugins.plugins-setup")
 
 -- [theme]--
 require("plugins.catppuccin")
--- require("plugins.rose-pine")
+require("plugins.rose-pine")
 
 -- [greeter,statuline,bufferline,fileExplore,markerlist]--
 require("plugins.alpha")
@@ -16,7 +16,8 @@ require("plugins.indent")
 require("plugins.comment2")
 require("plugins.autopairs")
 
--- [better highlight and region select]--
+--[[ Parsing engine ]]
+-- better highlight and region select
 require("plugins.treesitter")
 
 -- [fuzzy finder,picker]--
@@ -34,6 +35,7 @@ require("plugins.lsp.fidget")
 -- [git]--
 require("plugins.gitsigns")
 -- require("plugins.diffview")
+--
 -- [base]--
 require("core")
 

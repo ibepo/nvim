@@ -10,8 +10,8 @@
 │   │   ├── mappings.lua
 │   │   └── options.lua
 │   └── plugins
-│       ├── alpha.lua
-│       ├── autopairs.lua
+│       ├── alpha.lua      
+│       ├── autopairs.lua   
 │       ├── bufferline.lua
 │       ├── catppuccin.lua
 │       ├── cmp.lua

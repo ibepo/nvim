@@ -1,11 +1,48 @@
 local lsp_zero = require('lsp-zero')
+local cmp = require('cmp')
+local luasnip = require('luasnip')
+
+------------------------------------------------------------------------------------------------------------
+-- lsp_zero and lsp-config 
+------------------------------------------------------------------------------------------------------------
+
+--lspzero预设
 lsp_zero.preset('recommended')
-ensure_installed = {"pyproject-flake8", "tsserver", "html", "cssls", "rust_analyzer", "tailwindcss", "sumneko_lua",
-                    "emmet_ls", "clangd"}
+--lspzero个性化
+lsp_zero.set_preferences({
+   -- 诊断标识
+    sign_icons = {
+        error = '',
+        warn = '',
+        hint = '',
+        info = ''
+    }
+})
+
+-- 需要lsp预安装的语言服务器
+lsp_zero.ensure_installed({"sumneko_lua", "tsserver", "html", "cssls", "rust_analyzer", "tailwindcss", "emmet_ls", "clangd"})
+
+-- Disables one or more language server
+-- lsp_zero.skip_server_setup({'rust_analyzer'})
+
 
 -- Using .setup_nvim_cmp() will allow you to override some options of nvim-cmp.
 lsp_zero.setup_nvim_cmp({
+    -- 设置感知来源的顺序和触发字符个数
+    sources = {{
+        name = 'buffer',
+        keyword_length = 3
+    }, {
+        name = 'luasnip',
+        keyword_length = 2
+    }, {
+        name = 'nvim_lsp',
+        keyword_length = 1
+    }, {
+        name = 'path'
+    }},
     -- 左侧感知区UI
+    -- Change the look
     formatting = {
         fields = {'kind', 'abbr', 'menu'},
         format = require('lspkind').cmp_format({
@@ -31,11 +68,18 @@ lsp_zero.setup_nvim_cmp({
     }
 })
 
+-- the function below will be executed whenever
+-- a language server is attached to a buffer
 -- lsp_zero.on_attach(function(client, bufnr)
 --     print('Greetings from on_attach')
 -- end)
 
 lsp_zero.setup()
+
+
+------------------------------------------------------------------------------------------------------------
+-- lsp_zero and null
+------------------------------------------------------------------------------------------------------------
 
 local null_ls = require('null-ls')
 local null_opts = lsp_zero.build_options('null-ls', {})
