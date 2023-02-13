@@ -1,6 +1,5 @@
 # nvim
 ```shell
-
 .
 ├── init.lua
 ├── lua

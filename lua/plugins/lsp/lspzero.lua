@@ -21,7 +21,6 @@ lsp_zero.set_preferences({
 
 -- 需要lsp预安装的语言服务器
 lsp_zero.ensure_installed({
-	"sumneko_lua",
 	"tsserver",
 	"html",
 	"cssls",
@@ -117,19 +116,17 @@ null_ls.setup({
 			desc = "Format using null-ls",
 		})
 
-		-- if client.supports_method("textDocument/formatting") then
-		--     vim.api.nvim_clear_autocmds({
-		--         group = augroup,
-		--         buffer = bufnr
-		--     })
-		--     vim.api.nvim_create_autocmd("BufWritePre", {
-		--         group = augroup,
-		--         buffer = bufnr,
-		--         callback = function()
-		--             lsp_formatting(bufnr)
-		--         end
-		--     })
-		-- end
+		if client.supports_method("textDocument/formatting") then
+			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				group = augroup,
+				buffer = bufnr,
+				callback = function()
+					-- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+					vim.lsp.buf.format()
+				end,
+			})
+		end
 	end,
 	sources = { -- Replace these with the tools you have installed
 		null_ls.builtins.formatting.prettier,
@@ -159,4 +156,3 @@ require("mason-null-ls").setup({
 
 -- Required when `automatic_setup` is true
 require("mason-null-ls").setup_handlers()
--- vim.api.nvim_set_keymap("n", "<leader>fm", ":lua NullFormat", opts)
