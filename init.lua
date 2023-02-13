@@ -29,7 +29,7 @@ require("plugins.lsp.lspzero")
 -- require("plugins.lsp.lsp")
 -- require("plugins.cmp")
 -- require("plugins.lsp.lspsaga")
-require("plugins.lsp.null-ls")
+-- require("plugins.lsp.null-ls")
 require("plugins.lsp.fidget")
 
 -- [git]--
@@ -38,4 +38,3 @@ require("plugins.gitsigns")
 --
 -- [base]--
 require("core")
-

@@ -1,10 +1,12 @@
+local null_ls = require("null-ls")
+local formatting = null_ls.builtins.formatting
+local diagnositcs = null_ls.builtins.diagnositcs
+
 require("null-ls").setup({
+	debug = false,
 	sources = {
-		-- you must download code formatter by yourself!
-		require("null-ls").builtins.formatting.stylua,
-		require("null-ls").builtins.formatting.black,
-		require("null-ls").builtins.formatting.prettier,
-		require("null-ls").builtins.formatting.google_java_format,
-		require("null-ls").builtins.formatting.gofmt,
+		formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
+		formatting.stylua,
+		formatting.black.with({ extra_args = { "--fast" } }),
 	},
 })
