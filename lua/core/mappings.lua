@@ -6,11 +6,11 @@
 -- term_mode = "t",
 -- command_mode = "c",
 local opts = {
-    noremap = true,
-    silent = true
+	noremap = true,
+	silent = true,
 }
 local term_opts = {
-    silent = true
+	silent = true,
 }
 local keymap = vim.api.nvim_set_keymap
 
@@ -35,12 +35,11 @@ keymap("n", "x", '"_x', opts)
 -- keymap("n", "<C-k>", "<C-w>k", opts)
 -- keymap("n", "<C-l>", "<C-w>l", opts)
 
-
 -- nvim-tree(toggle & focus) --
 -- FileExpolre
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 keymap("n", "<leader>f", ":NvimTreeFindFile<CR>", opts)
-keymap("n", "<leader>i", ":PackerSync<CR>", opts)
+-- keymap("n", "<leader>i",":PackerSync<CR>", opts)
 
 --maximizer
 keymap("n", "<leader>sm", ":MaximizerToggle<CR>", opts)
@@ -49,7 +48,8 @@ keymap("n", "<leader>sm", ":MaximizerToggle<CR>", opts)
 -- keymap("n", "Q", ":q<CR>", opts)
 -- keymap("n", "S", ":w<CR>", opts)
 keymap("n", "<leader>w", ":w<CR>", opts)
-keymap("n", "<leader>q", ":q<CR>", opts)
+keymap("n", "Q", ":wq!<CR>", opts)
+keymap("n", "<leader>q", ":bd<CR>", opts)
 
 -- Stay in indent mode --
 keymap("v", "<", "<gv", opts)
@@ -73,18 +73,19 @@ keymap("n", "<leader>sx", ":close<cr>", opts)
 --better tabs
 keymap("n", "<leader>to", ":tabnew<cr>", opts)
 keymap("n", "<leader>tx", ":tabclose<cr>", opts)
+
 -- Naviagate buffers --
 keymap("n", "<TAB>", ":bnext<CR>", opts)
 keymap("n", "<S-TAB>", ":bprevious<CR>", opts)
 
-
 --  Average adjustment window --
-keymap("n", "<C-=>", "<C-w>=", opts)
+-- keymap("n", "<C-=>", "<C-w>=", opts)
+--
 -- Swap and move windows --
-keymap("n", "<Space>h", "<C-w>H", opts)
-keymap("n", "<Space>j", "<C-w>J", opts)
-keymap("n", "<Space>k", "<C-w>K", opts)
-keymap("n", "<Space>l", "<C-w>L", opts)
+-- keymap("n", "<Space>h", "<C-w>H", opts)
+-- keymap("n", "<Space>j", "<C-w>J", opts)
+-- keymap("n", "<Space>k", "<C-w>K", opts)
+-- keymap("n", "<Space>l", "<C-w>L", opts)
 
 -- Adjust the direction of the split screen --
 keymap("n", ",", "<C-w>t<C-w>K", opts)
@@ -113,11 +114,12 @@ keymap("n", "<leader>fa", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>fh", ":Telescope grep_string<CR>", opts)
 keymap("n", "<leader>fi", ":Telescope git_files<CR>", opts)
 keymap("n", "<leader>fm", ":Telescope harpoon marks<CR>", opts)
+keymap("n", "<leader>fr", "<cmd> Telescope registers <CR>", opts)
 keymap("n", "<leader>fs", ":Telescope lsp_document_symbols <CR>", opts)
 keymap("n", "<leader>fd", ":Telescope lsp_document_diagnostics <CR>", opts)
 
 -- trouble.nvim
-keymap("n", "<leader>xx", ":TroubleToggle<CR>", opts)
+keymap("n", "<leader>tr", ":TroubleToggle<CR>", opts)
 
 -- keymap("n", "tg", ":SymbolsOutline<CR>", opts)
 -- setup mapping to call :LazyGit
@@ -140,20 +142,17 @@ keymap("n", "<C-u>", "<C-u>zz", opts)
 
 -- To avoid weird vim original behaviour that would change your copy after
 -- paste if another world was highlighted -> Now it just keeps it
-keymap("x", "<leader>p", "\"_dP",opts)
+keymap("x", "<leader>p", '"_dP', opts)
 
 -- Delete to black void register (true delete)
-keymap("n", "<leader>d", "\"_d",opts)
-keymap("v", "<leader>d", "\"_d",opts)
+keymap("n", "<leader>d", '"_d', opts)
+keymap("v", "<leader>d", '"_d', opts)
 
 -- When activated, it access the plus register (the system clipboard) to copy
 -- paste outside of neovim, leaving plain y usage for neovim exclusively
-vim.keymap.set("n", "<leader>y", "\"+y",opts)
-vim.keymap.set("v", "<leader>y", "\"+y",opts)
-vim.keymap.set("n", "<leader>Y", "\"+Y",opts)
+vim.keymap.set("n", "<leader>y", '"+y', opts)
+vim.keymap.set("v", "<leader>y", '"+y', opts)
+vim.keymap.set("n", "<leader>Y", '"+Y', opts)
 
 -- Shorcut for searching and replacing (structure already written)
-vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>",opts)
-
-
-
+vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>", opts)

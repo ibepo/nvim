@@ -51,6 +51,7 @@ lsp_zero.setup_nvim_cmp({
 		},
 		{
 			name = "path",
+			keyword_length = 2,
 		},
 	},
 	-- 左侧感知区UI

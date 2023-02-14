@@ -7,7 +7,6 @@ require("plugins.rose-pine")
 -- [greeter,statuline,bufferline,fileExplore,markerlist]--
 require("plugins.alpha")
 require("plugins.lualine")
-require("plugins.bufferline")
 require("plugins.nvim-tree")
 require("plugins.harpoon")
 
@@ -15,6 +14,7 @@ require("plugins.harpoon")
 require("plugins.indent")
 require("plugins.comment2")
 require("plugins.autopairs")
+require("plugins.neoscroll")
 
 --[[ Parsing engine ]]
 -- better highlight and region select
@@ -38,3 +38,5 @@ require("plugins.gitsigns")
 --
 -- [base]--
 require("core")
+
+require("plugins.bufferline")
