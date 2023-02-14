@@ -9,12 +9,7 @@ require("plugins.alpha")
 require("plugins.lualine")
 require("plugins.nvim-tree")
 require("plugins.harpoon")
-
--- [eshanced  edit]--
-require("plugins.indent")
-require("plugins.comment2")
-require("plugins.autopairs")
-require("plugins.neoscroll")
+require("plugins.toggleterm")
 
 --[[ Parsing engine ]]
 -- better highlight and region select
@@ -39,4 +34,10 @@ require("plugins.gitsigns")
 -- [base]--
 require("core")
 
+-- [eshanced  edit]--
+require("plugins.indent")
+require("plugins.comment2")
+require("plugins.autopairs")
 require("plugins.bufferline")
+require("plugins.neoscroll")
+require("plugins.misc")

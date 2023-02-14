@@ -38,7 +38,7 @@ packer.init({
 -- 配置插件
 return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
-	use({ "lewis6991/impatient.nvim" })
+	use("lewis6991/impatient.nvim")
 
 	-- theme
 	-- use({
@@ -62,7 +62,7 @@ return require("packer").startup(function(use)
 	use("christoomey/vim-tmux-navigator")
 	use("szw/vim-maximizer")
 	use("karb94/neoscroll.nvim")
-
+	use("akinsho/toggleterm.nvim")
 	-- autocompletion
 	-- use("hrsh7th/nvim-cmp") -- completion plugin
 	-- use("hrsh7th/cmp-buffer") -- source for text in buffer
