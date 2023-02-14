@@ -11,17 +11,15 @@ end
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup({
-	sort_by = "case_sensitive",
 	update_focused_file = {
-		enable = true,
+		enable = false,
 		update_cwd = true,
 	},
-	-- auto_close=true,
 	renderer = {
 		root_folder_modifier = ":t",
 		icons = {
 			glyphs = {
-				default = "",
+				default = "",
 				symlink = "",
 				folder = {
 					arrow_open = "",
@@ -35,10 +33,10 @@ nvim_tree.setup({
 				},
 				git = {
 					unstaged = "",
-					untracked = "u",
 					staged = "S",
 					unmerged = "",
 					renamed = "➜",
+					untracked = "U",
 					deleted = "",
 					ignored = "◌",
 				},
@@ -52,7 +50,7 @@ nvim_tree.setup({
 			hint = "",
 			info = "",
 			warning = "",
-			error = "",
+			error = "",
 		},
 	},
 	view = {
@@ -60,23 +58,9 @@ nvim_tree.setup({
 		side = "left",
 		mappings = {
 			list = {
-				{
-					key = { "l", "<CR>", "o", "<LeftMouse>" },
-					cb = tree_cb("edit"),
-				},
-				{
-					key = "h",
-					cb = tree_cb("close_node"),
-				},
-				{
-					key = "v",
-					cb = tree_cb("vsplit"),
-				},
-
-				{
-					key = "H",
-					cb = tree_cb("split"),
-				},
+				{ key = { "l", "<CR>", "o" }, cb = tree_cb("edit") },
+				{ key = "h", cb = tree_cb("close_node") },
+				{ key = "v", cb = tree_cb("vsplit") },
 			},
 		},
 	},

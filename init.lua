@@ -1,7 +1,7 @@
 require("plugins.plugins-setup")
 
 -- [theme]--
-require("plugins.catppuccin")
+-- require("plugins.catppuccin")
 require("plugins.rose-pine")
 
 -- [greeter,statuline,bufferline,fileExplore,markerlist]--
@@ -10,6 +10,14 @@ require("plugins.lualine")
 require("plugins.nvim-tree")
 require("plugins.harpoon")
 require("plugins.toggleterm")
+
+-- [eshanced  edit]--
+require("plugins.indent")
+require("plugins.comment2")
+require("plugins.autopairs")
+require("plugins.bufferline")
+require("plugins.neoscroll")
+require("plugins.illuminate")
 
 --[[ Parsing engine ]]
 -- better highlight and region select
@@ -33,11 +41,3 @@ require("plugins.gitsigns")
 --
 -- [base]--
 require("core")
-
--- [eshanced  edit]--
-require("plugins.indent")
-require("plugins.comment2")
-require("plugins.autopairs")
-require("plugins.bufferline")
-require("plugins.neoscroll")
-require("plugins.misc")

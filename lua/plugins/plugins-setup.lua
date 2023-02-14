@@ -93,9 +93,11 @@ return require("packer").startup(function(use)
 	use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
 	use({ "j-hui/fidget.nvim" })
 	use({ "folke/trouble.nvim" })
+
 	-- formatting & linting
 	use({ "jose-elias-alvarez/null-ls.nvim" })
 	use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
+
 	-- language servers
 	use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
 	use("simrat39/rust-tools.nvim") -- rust server
@@ -149,7 +151,7 @@ return require("packer").startup(function(use)
 	})
 	use("nvim-treesitter/nvim-treesitter-textobjects")
 	use("nvim-treesitter/playground")
-
+	use("RRethy/vim-illuminate")
 	-- use 'machakann/vim-highlightedyank'
 	-- use "tpope/vim-surround"
 	-- use "tpope/vim-repeat"
