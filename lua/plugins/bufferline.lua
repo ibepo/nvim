@@ -10,8 +10,9 @@ bufferline.setup({
 		mode = "buffers", -- set to "tabs" to only show tabpages instead
 		-- numbers = "buffer_id",
 		numbers = "ordinal",
+		-- indicator_style = "__",
 		close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
-		indicator_style = "underline",
+		-- indicator_style = "underline",
 		buffer_close_icon = "",
 		modified_icon = "●",
 		close_icon = "",

@@ -63,6 +63,12 @@ return require("packer").startup(function(use)
 	use("szw/vim-maximizer")
 	use("karb94/neoscroll.nvim")
 	use("akinsho/toggleterm.nvim")
+	use({
+		"stevearc/oil.nvim",
+		config = function()
+			require("oil").setup()
+		end,
+	})
 	-- autocompletion
 	-- use("hrsh7th/nvim-cmp") -- completion plugin
 	-- use("hrsh7th/cmp-buffer") -- source for text in buffer
@@ -191,19 +197,8 @@ return require("packer").startup(function(use)
 		"kdheepak/lazygit.nvim",
 		cmd = "LazyGit",
 	})
-	-- -- A neovim plugin to persist and toggle multiple terminals during an editing session--
-	-- use({
-	--     "akinsho/toggleterm.nvim",
-	--     -- cmd = "ToggleTerm",
-	--     config = "require('plugins.configs.toggleterm')"
-	-- })
-	-- use({
-	-- 	"kristijanhusak/vim-dadbod-ui",
-	-- 	config = "require('plugins.configs.vim-dadbod')",
-	-- 	cmd = { "DBUI" },
-	-- 	required = { "tpope/vim-dadbod" },
-	-- })
-
+	--awful
+	-- use("wincent/command-t")
 	if packer_bootstrap then
 		require("packer").sync()
 	end

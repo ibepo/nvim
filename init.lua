@@ -15,7 +15,6 @@ require("plugins.toggleterm")
 require("plugins.indent")
 require("plugins.comment2")
 require("plugins.autopairs")
-require("plugins.bufferline")
 require("plugins.neoscroll")
 require("plugins.illuminate")
 
@@ -41,3 +40,5 @@ require("plugins.gitsigns")
 --
 -- [base]--
 require("core")
+require("plugins.misc")
+require("plugins.bufferline")

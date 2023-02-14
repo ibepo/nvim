@@ -1,0 +1,1 @@
+require("wincent.commandt").setup()
