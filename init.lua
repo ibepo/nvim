@@ -15,7 +15,6 @@ require("plugins.toggleterm")
 require("plugins.indent")
 require("plugins.comment2")
 require("plugins.autopairs")
-require("plugins.neoscroll")
 require("plugins.illuminate")
 
 --[[ Parsing engine ]]
@@ -33,6 +32,9 @@ require("plugins.lsp.lspzero")
 -- require("plugins.lsp.lspsaga")
 -- require("plugins.lsp.null-ls")
 require("plugins.lsp.fidget")
+require("plugins.lsp.aerial")
+require("plugins.lsp.lsp-signature")
+require("plugins.lsp.lsp-symbols-outline")
 
 -- [git]--
 require("plugins.gitsigns")
@@ -42,3 +44,4 @@ require("plugins.gitsigns")
 require("core")
 require("plugins.misc")
 require("plugins.bufferline")
+require("plugins.neoscroll")

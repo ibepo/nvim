@@ -37,11 +37,13 @@ packer.init({
 
 -- 配置插件
 return require("packer").startup(function(use)
+	--必备-------------------------------------------------------
 	use("wbthomason/packer.nvim")
 	use("lewis6991/impatient.nvim")
+	use({ "nvim-lua/popup.nvim" })
+	use("nvim-lua/plenary.nvim")
 
-	-- theme
-	-- use({
+	-- theme------------------------------------------------------
 	use("rose-pine/neovim")
 	use("EdenEast/nightfox.nvim")
 	use("folke/tokyonight.nvim")
@@ -50,9 +52,9 @@ return require("packer").startup(function(use)
 		as = "catppuccin",
 	})
 
-	-- greeter,bufferline,statuline,fileExplore,indent,tmux navigation
+	--basic---------------------------------------------------------
+	-- greeter,bufferline,statuline,fileExplore,indent,tmux navigation,smooth scroll,floatTerm
 	use("kyazdani42/nvim-web-devicons")
-	use("nvim-lua/plenary.nvim")
 	use("goolord/alpha-nvim")
 	use("nvim-lualine/lualine.nvim")
 	use("akinsho/bufferline.nvim")
@@ -63,13 +65,14 @@ return require("packer").startup(function(use)
 	use("szw/vim-maximizer")
 	use("karb94/neoscroll.nvim")
 	use("akinsho/toggleterm.nvim")
-	use({
-		"stevearc/oil.nvim",
-		config = function()
-			require("oil").setup()
-		end,
-	})
-	-- autocompletion
+	use("machakann/vim-sandwich")
+	use({ "windwp/nvim-autopairs" }) -- auto closing
+	use("nacro90/numb.nvim")
+	-- use 'machakann/vim-highlightedyank'
+	-- use "tpope/vim-surround"
+	-- use "tpope/vim-repeat"
+
+	--cmp--------------------------------------------------------------
 	-- use("hrsh7th/nvim-cmp") -- completion plugin
 	-- use("hrsh7th/cmp-buffer") -- source for text in buffer
 	-- use("hrsh7th/cmp-path") -- source for file system paths
@@ -77,38 +80,46 @@ return require("packer").startup(function(use)
 	-- use("hrsh7th/cmp-nvim-lsp")
 	-- use("hrsh7th/cmp-nvim-lua")
 
-	-- snippets
+	-- snippets--------------------------------------------------------
 	-- use("L3MON4D3/LuaSnip") -- snippet engine
 	-- use("saadparwaiz1/cmp_luasnip") -- for autocompletion
 	-- use("rafamadriz/friendly-snippets") -- useful snippets
 
-	-- lsp
+	-- lsp-------------------------------------------------------------
 	-- managing & installing lsp servers, linters & formatters
 	-- use({"williamboman/mason.nvim"})
 	-- use({"williamboman/mason-lspconfig.nvim"}) -- bridges gap b/w mason & lspconfig
 	-- configuring lsp servers
 	-- use("neovim/nvim-lspconfig")
+	-- use({
+	-- 	"glepnir/lspsaga.nvim",
+	-- 	branch = "main",
+	-- }) -- A light-weight LSP plugin based on Neovim built-in LSP with highly a performant UI
 
-	--  enhanced lsp uis
-	use({
-		"glepnir/lspsaga.nvim",
-		branch = "main",
-	}) -- A light-weight LSP plugin based on Neovim built-in LSP with highly a performant UI
-
-	-- enhanced lsp uis
-	use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
+	-- LSP Enhancement---------------------------------------------------------
+	-- use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
 	use({ "j-hui/fidget.nvim" })
 	use({ "folke/trouble.nvim" })
+	use("simrat39/symbols-outline.nvim")
+	use({
+		"ray-x/lsp_signature.nvim",
+	})
+	use({
+		"ahmedkhalf/lsp-rooter.nvim",
+		config = function()
+			require("lsp-rooter").setup({})
+		end,
+	})
 
-	-- formatting & linting
+	-- formatting & linting----------------------------------------------------
 	use({ "jose-elias-alvarez/null-ls.nvim" })
 	use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
 
-	-- language servers
+	-- language servers--------------------------------------------------------
 	use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
 	use("simrat39/rust-tools.nvim") -- rust server
 
-	-- lsp allinone
+	-- lsp allinone------------------------------------------------------------
 	use({
 		"VonHeikemen/lsp-zero.nvim",
 		branch = "v1.x",
@@ -128,7 +139,7 @@ return require("packer").startup(function(use)
 			{ "rafamadriz/friendly-snippets" }, -- Optional
 		},
 	})
-	-- deug
+	-- Deug-------------------------------------------------------------------
 	-- use({
 	--     "rcarriga/nvim-dap-ui",
 	--     requires = {"mfussenegger/nvim-dap"},
@@ -142,35 +153,45 @@ return require("packer").startup(function(use)
 	--     end
 	-- })
 
-	-- enhanced edit
-	use("machakann/vim-sandwich")
-	use({ "windwp/nvim-autopairs" }) -- auto closing
-	use({
-		"windwp/nvim-ts-autotag",
-		after = "nvim-treesitter",
-	}) -- autoclose tags
-	use({ "nvim-lua/popup.nvim" })
-	-- treesitter
+	-- Treesitter
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 	})
+	use({
+		"windwp/nvim-ts-autotag",
+		after = "nvim-treesitter",
+	}) -- autoclose tags
 	use("nvim-treesitter/nvim-treesitter-textobjects")
+	use({
+		"andymass/vim-matchup",
+		setup = function()
+			vim.g.matchup_matchparen_offscreen = { method = "popup" }
+		end,
+	})
 	use("nvim-treesitter/playground")
 	use("RRethy/vim-illuminate")
-	-- use 'machakann/vim-highlightedyank'
-	-- use "tpope/vim-surround"
-	-- use "tpope/vim-repeat"
 
 	use("numToStr/Comment.nvim")
 	use("JoosepAlviste/nvim-ts-context-commentstring")
 
-	-- History modification record
+	-- History modification record----------------------
 	use({ "mbbill/undotree" })
-	use({ "nathom/filetype.nvim" })
 
-	-- git
+	--git------------------------------------------------
+	use({
+		"kdheepak/lazygit.nvim",
+		cmd = "LazyGit",
+	})
 	use({ "lewis6991/gitsigns.nvim" })
+	-- use({
+	-- 	"f-person/git-blame.nvim",
+	-- 	event = "BufRead",
+	-- 	config = function()
+	-- 		vim.cmd("highlight default link gitblame SpecialComment")
+	-- 		vim.g.gitblame_enabled = 1
+	-- 	end,
+	-- })
 	use({
 		"sindrets/diffview.nvim",
 		cmd = {
@@ -182,23 +203,18 @@ return require("packer").startup(function(use)
 			"DiffviewFileHistory",
 		},
 	})
-	-- telescope
+	-- telescope-----------------------------------------
 	use({
 		"nvim-telescope/telescope-fzf-native.nvim",
 		run = "make",
 	})
+	use({ "nathom/filetype.nvim" })
 	use("nvim-telescope/telescope-media-files.nvim")
 	use({
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
 	})
-	-- git
-	use({
-		"kdheepak/lazygit.nvim",
-		cmd = "LazyGit",
-	})
-	--awful
-	-- use("wincent/command-t")
+
 	if packer_bootstrap then
 		require("packer").sync()
 	end

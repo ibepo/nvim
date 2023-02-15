@@ -28,6 +28,11 @@ treesitter.setup({
 	autopairs = {
 		enable = true,
 	},
+	matchup = {
+		enable = true, -- mandatory, false will disable the whole extension
+		disable = { "c", "ruby" }, -- optional, list of language that will be disabled
+		-- [options]
+	},
 	-- 启用代码高亮功能
 	highlight = {
 		enable = true, -- false will disable the whole extension

@@ -136,6 +136,8 @@ keymap("n", "<C-b>", ":lua require'dap'.toggle_breakpoint()<CR>", opts)
 -- keymap("n", "L", "7l", opts)
 -- keymap("v", "p", '"_dP', opts)
 
+keymap("n", "<leader>tt", "<cmd>ToggleTerm<CR>", opts) -- see outline on right hand side
+
 -- better pagescroll
 keymap("n", "<C-d>", "<C-d>zz", opts)
 keymap("n", "<C-u>", "<C-u>zz", opts)

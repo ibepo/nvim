@@ -20,15 +20,7 @@ lsp_zero.set_preferences({
 })
 
 -- 需要lsp预安装的语言服务器
-lsp_zero.ensure_installed({
-	"tsserver",
-	"html",
-	"cssls",
-	"rust_analyzer",
-	"tailwindcss",
-	"emmet_ls",
-	"clangd",
-})
+lsp_zero.ensure_installed({ "tsserver", "html", "cssls", "rust_analyzer", "tailwindcss", "emmet_ls", "clangd" })
 local kind_icons = {
 	Text = "",
 	Method = "m",
@@ -117,11 +109,12 @@ lsp_zero.setup_nvim_cmp({
 	},
 })
 
--- the function below will be executed whenever
--- a language server is attached to a buffer
--- lsp_zero.on_attach(function(client, bufnr)
---     print('Greetings from on_attach')
--- end)
+-- local navic = require("nvim-navic")
+lsp_zero.on_attach(function(client, bufnr)
+	-- if client.server_capabilities.documentSymbolProvider then
+	--     navic.attach(client, bufnr)
+	-- end
+end)
 
 lsp_zero.setup()
 
@@ -154,7 +147,10 @@ null_ls.setup({
 		})
 
 		if client.supports_method("textDocument/formatting") then
-			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+			vim.api.nvim_clear_autocmds({
+				group = augroup,
+				buffer = bufnr,
+			})
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				group = augroup,
 				buffer = bufnr,
