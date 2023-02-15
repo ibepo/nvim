@@ -32,7 +32,6 @@ require("plugins.lsp.lspzero")
 -- require("plugins.lsp.lspsaga")
 -- require("plugins.lsp.null-ls")
 require("plugins.lsp.fidget")
-require("plugins.lsp.aerial")
 require("plugins.lsp.lsp-signature")
 require("plugins.lsp.lsp-symbols-outline")
 
