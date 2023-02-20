@@ -1,4 +1,5 @@
 require("plugins.plugins-setup")
+require("plugins.filetype")
 
 -- [theme]--
 -- require("plugins.catppuccin")

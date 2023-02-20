@@ -42,7 +42,7 @@ return require("packer").startup(function(use)
 	use("lewis6991/impatient.nvim")
 	use({ "nvim-lua/popup.nvim" })
 	use("nvim-lua/plenary.nvim")
-
+	use({ "nathom/filetype.nvim" })
 	-- theme------------------------------------------------------
 	use("rose-pine/neovim")
 	use("EdenEast/nightfox.nvim")
@@ -208,7 +208,6 @@ return require("packer").startup(function(use)
 		"nvim-telescope/telescope-fzf-native.nvim",
 		run = "make",
 	})
-	use({ "nathom/filetype.nvim" })
 	use("nvim-telescope/telescope-media-files.nvim")
 	use({
 		"nvim-telescope/telescope.nvim",
