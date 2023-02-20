@@ -10,28 +10,14 @@ if not cmp_nvim_lsp_status then
     return
 end
 
--- import typescript plugin safely
-local typescript_setup, typescript = pcall(require, "typescript")
-if not typescript_setup then
-    return
-end
-
--- import rust-tools plugin safely
-local rust_setup, rt = pcall(require, "rust-tools")
-if not rust_setup then
-    return
-end
-
 local keymap = vim.keymap -- for conciseness
-
+local opts = {
+    noremap = true,
+    silent = true,
+    buffer = bufnr
+}
 -- enable keybinds only for when lsp server available
 local on_attach = function(client, bufnr)
-    -- keybind options
-    local opts = {
-        noremap = true,
-        silent = true,
-        buffer = bufnr
-    }
 
     -- set keybinds
     keymap.set("n", "gr", "<cmd>Lspsaga lsp_finder<CR>", opts) -- show definition, references
@@ -45,10 +31,9 @@ local on_attach = function(client, bufnr)
     keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts) -- jump to previous diagnostic in buffer
     keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts) -- jump to next diagnostic in buffer
     keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
-    keymap.set("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts) -- see outline on right hand side
+    keymap.set("n", "<leader>o", ":SymbolsOutline<CR>", opts) -- see outline on right hand side
     keymap.set("n", "<leader>tt", "<cmd>Lspsaga term_toggle<CR>", opts) -- see outline on right hand side
 
-    -- typescript specific keymaps (e.g. rename file and update imports)
     if client.name == "tsserver" then
         keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>") -- rename file and update imports
         keymap.set("n", "<leader>oi", ":TypescriptOrganizeImports<CR>") -- organize imports (not in youtube nvim video)
@@ -76,28 +61,6 @@ for type, icon in pairs(signs) do
     })
 end
 
--- configure typescript server with plugin
-typescript.setup({
-    server = {
-        capabilities = capabilities,
-        on_attach = on_attach
-    }
-})
-
--- configure rust server with plugin
-rt.setup({
-    server = {
-        capabilities = capabilities,
-        on_attach = on_attach
-    }
-})
-
--- configure cpp clangd
-lspconfig["clangd"].setup({
-    capabilities = capabilities,
-    on_attach = on_attach
-})
-
 -- configure css server
 lspconfig["cssls"].setup({
     capabilities = capabilities,
@@ -121,7 +84,7 @@ lspconfig["emmet_ls"].setup({
     filetypes = {"html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte"}
 })
 
--- configure pyright server
+-- pyright for python
 lspconfig["pyright"].setup({
     capabilities = capabilities,
     on_attach = on_attach,
@@ -138,14 +101,18 @@ lspconfig["pyright"].setup({
     }
 })
 
--- configure lua server (with special settings)
-lspconfig["sumneko_lua"].setup({
+-- lua_ls for lua
+lspconfig["lua_ls"].setup({
     capabilities = capabilities,
     on_attach = on_attach,
     settings = { -- custom settings for lua
         Lua = {
-            -- make the language server recognize "vim" global
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT'
+            },
             diagnostics = {
+                -- Get the language server to recognize the `vim` global
                 globals = {"vim"}
             },
             workspace = {
@@ -154,6 +121,9 @@ lspconfig["sumneko_lua"].setup({
                     [vim.fn.expand("$VIMRUNTIME/lua")] = true,
                     [vim.fn.stdpath("config") .. "/lua"] = true
                 }
+            },
+            telemetry = {
+                enable = false
             }
         }
     }

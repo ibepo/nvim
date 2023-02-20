@@ -21,7 +21,7 @@ local on_attach = function(client, bufnr)
     }
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-    -- vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
     vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
     --[[ vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts) ]]
@@ -58,33 +58,10 @@ capabilities.textDocument.foldingRange = {
 }
 
 local nvim_lsp = require("lspconfig")
-
 ---------------------
 -- setup languages --
 ---------------------
--- GoLang
-nvim_lsp["gopls"].setup({
-    cmd = {"/home/ruixi/.local/share/nvim/lsp_servers/gopls/gopls"},
-    on_attach = on_attach,
-    capabilities = capabilities,
-    settings = {
-        gopls = {
-            experimentalPostfixCompletions = true,
-            analyses = {
-                unusedparams = true,
-                shadow = true
-            },
-            staticcheck = true
-        }
-    },
-    init_options = {
-        usePlaceholders = true
-    }
-})
--- C
-nvim_lsp.clangd.setup({
-    cmd = {"/home/ruixi/.local/share/nvim/lsp_servers/clangd/clangd/bin/clangd"}
-})
+
 -- Python
 nvim_lsp.pyright.setup({
     on_attach = on_attach,
@@ -101,7 +78,7 @@ nvim_lsp.pyright.setup({
     }
 })
 
--- sumneko_lua
+-- lua
 nvim_lsp.sumneko_lua.setup({
     on_attach = on_attach,
     capabilities = capabilities,
@@ -127,10 +104,6 @@ nvim_lsp.sumneko_lua.setup({
     }
 })
 
-nvim_lsp.html.setup({})
-nvim_lsp.cssls.setup({})
-nvim_lsp.tsserver.setup({})
-nvim_lsp.bashls.setup({})
 -- ebuild Syntastic(install dev-util/pkgcheck)
 vim.g.syntastic_ebuild_checkers = "pkgcheck"
 

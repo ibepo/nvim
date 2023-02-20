@@ -1,12 +1,12 @@
 local ensure_packer = function()
-	local fn = vim.fn
-	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-		vim.cmd([[packadd packer.nvim]])
-		return true
-	end
-	return false
+    local fn = vim.fn
+    local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+    if fn.empty(fn.glob(install_path)) > 0 then
+        fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
+        vim.cmd([[packadd packer.nvim]])
+        return true
+    end
+    return false
 end
 
 local packer_bootstrap = ensure_packer()
@@ -21,200 +21,206 @@ vim.cmd([[
 
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
-	return
+    return
 end
 
 -- 浮动UI
 packer.init({
-	display = {
-		open_fn = function()
-			return require("packer.util").float({
-				border = "rounded",
-			})
-		end,
-	},
+    display = {
+        open_fn = function()
+            return require("packer.util").float({
+                border = "rounded"
+            })
+        end
+    }
 })
 
 -- 配置插件
 return require("packer").startup(function(use)
-	--必备-------------------------------------------------------
-	use("wbthomason/packer.nvim")
-	use("lewis6991/impatient.nvim")
-	use({ "nvim-lua/popup.nvim" })
-	use("nvim-lua/plenary.nvim")
-	use({ "nathom/filetype.nvim" })
-	-- theme------------------------------------------------------
-	use("rose-pine/neovim")
-	use("EdenEast/nightfox.nvim")
-	use("folke/tokyonight.nvim")
-	use({
-		"catppuccin/nvim",
-		as = "catppuccin",
-	})
+    -- 必备-------------------------------------------------------
+    use("wbthomason/packer.nvim")
+    use("lewis6991/impatient.nvim")
+    use({"nvim-lua/popup.nvim"})
+    use("nvim-lua/plenary.nvim")
+    use({"nathom/filetype.nvim"})
+    -- theme------------------------------------------------------
+    use("rose-pine/neovim")
+    use("EdenEast/nightfox.nvim")
+    use("folke/tokyonight.nvim")
+    use({
+        "catppuccin/nvim",
+        as = "catppuccin"
+    })
 
-	--basic---------------------------------------------------------
-	-- greeter,bufferline,statuline,fileExplore,indent,tmux navigation,smooth scroll,floatTerm
-	use("kyazdani42/nvim-web-devicons")
-	use("goolord/alpha-nvim")
-	use("nvim-lualine/lualine.nvim")
-	use("akinsho/bufferline.nvim")
-	use("kyazdani42/nvim-tree.lua")
-	use("lukas-reineke/indent-blankline.nvim")
-	use("ThePrimeagen/harpoon")
-	use("christoomey/vim-tmux-navigator")
-	use("szw/vim-maximizer")
-	use("karb94/neoscroll.nvim")
-	use("akinsho/toggleterm.nvim")
-	use("machakann/vim-sandwich")
-	use({ "windwp/nvim-autopairs" }) -- auto closing
-	use("nacro90/numb.nvim")
-	-- use 'machakann/vim-highlightedyank'
-	-- use "tpope/vim-surround"
-	-- use "tpope/vim-repeat"
+    -- basic---------------------------------------------------------
+    -- greeter,bufferline,statuline,fileExplore,indent,tmux navigation,smooth scroll,floatTerm
+    use("kyazdani42/nvim-web-devicons")
+    use("goolord/alpha-nvim")
+    use("nvim-lualine/lualine.nvim")
+    use("akinsho/bufferline.nvim")
+    use("kyazdani42/nvim-tree.lua")
+    use("lukas-reineke/indent-blankline.nvim")
+    use("ThePrimeagen/harpoon")
+    use("christoomey/vim-tmux-navigator")
+    use("szw/vim-maximizer")
+    use("karb94/neoscroll.nvim")
+    use("akinsho/toggleterm.nvim")
+    use("machakann/vim-sandwich")
+    use({"windwp/nvim-autopairs"}) -- auto closing
+    use("nacro90/numb.nvim")
+    use("norcalli/nvim-colorizer.lua")
+    -- Lua
+    use {
+        "folke/zen-mode.nvim",
+        config = function()
+            require("zen-mode").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        end
+    }
+    -- use 'machakann/vim-highlightedyank'
+    -- use "tpope/vim-surround"
+    -- use "tpope/vim-repeat"
 
-	--cmp--------------------------------------------------------------
-	-- use("hrsh7th/nvim-cmp") -- completion plugin
-	-- use("hrsh7th/cmp-buffer") -- source for text in buffer
-	-- use("hrsh7th/cmp-path") -- source for file system paths
-	use("hrsh7th/cmp-cmdline")
-	-- use("hrsh7th/cmp-nvim-lsp")
-	-- use("hrsh7th/cmp-nvim-lua")
+    -- cmp--------------------------------------------------------------
+    use("hrsh7th/nvim-cmp") -- completion plugin
+    use("hrsh7th/cmp-buffer") -- source for text in buffer
+    use("hrsh7th/cmp-path") -- source for file system paths
+    use("hrsh7th/cmp-cmdline")
+    use("hrsh7th/cmp-nvim-lsp")
+    use("hrsh7th/cmp-nvim-lua")
 
-	-- snippets--------------------------------------------------------
-	-- use("L3MON4D3/LuaSnip") -- snippet engine
-	-- use("saadparwaiz1/cmp_luasnip") -- for autocompletion
-	-- use("rafamadriz/friendly-snippets") -- useful snippets
+    -- snippets--------------------------------------------------------
+    use("L3MON4D3/LuaSnip") -- snippet engine
+    use("saadparwaiz1/cmp_luasnip") -- source for autocompletion
+    use("rafamadriz/friendly-snippets") -- useful snippets
 
-	-- lsp-------------------------------------------------------------
-	-- managing & installing lsp servers, linters & formatters
-	-- use({"williamboman/mason.nvim"})
-	-- use({"williamboman/mason-lspconfig.nvim"}) -- bridges gap b/w mason & lspconfig
-	-- configuring lsp servers
-	-- use("neovim/nvim-lspconfig")
-	-- use({
-	-- 	"glepnir/lspsaga.nvim",
-	-- 	branch = "main",
-	-- }) -- A light-weight LSP plugin based on Neovim built-in LSP with highly a performant UI
+    -- LSP-------------------------------------------------------------
+    -- managing & installing lsp servers, linters & formatters
+    use({"williamboman/mason.nvim"})
+    use({"williamboman/mason-lspconfig.nvim"}) -- bridges gap b/w mason & lspconfig
+    -- configuring lsp servers
+    use("neovim/nvim-lspconfig")
+    use({
+        "glepnir/lspsaga.nvim",
+        branch = "main"
+    }) -- A light-weight LSP plugin based on Neovim built-in LSP with highly a performant UI
 
-	-- LSP Enhancement---------------------------------------------------------
-	-- use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
-	use({ "j-hui/fidget.nvim" })
-	use({ "folke/trouble.nvim" })
-	use("simrat39/symbols-outline.nvim")
-	use({
-		"ray-x/lsp_signature.nvim",
-	})
-	use({
-		"ahmedkhalf/lsp-rooter.nvim",
-		config = function()
-			require("lsp-rooter").setup({})
-		end,
-	})
+    -- LSP Enhancement---------------------------------------------------------
+    use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
+    use({"j-hui/fidget.nvim"})
+    use({"folke/trouble.nvim"})
+    use("simrat39/symbols-outline.nvim")
+    use({"ray-x/lsp_signature.nvim"})
+    use({
+        "ahmedkhalf/lsp-rooter.nvim",
+        config = function()
+            require("lsp-rooter").setup({})
+        end
+    })
 
-	-- formatting & linting----------------------------------------------------
-	use({ "jose-elias-alvarez/null-ls.nvim" })
-	use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
+    -- formatting & linting----------------------------------------------------
+    use({"jose-elias-alvarez/null-ls.nvim"})
+    use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
 
-	-- language servers--------------------------------------------------------
-	use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
-	use("simrat39/rust-tools.nvim") -- rust server
+    -- language servers--------------------------------------------------------
+    -- use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
+    -- use("simrat39/rust-tools.nvim") -- rust server
 
-	-- lsp allinone------------------------------------------------------------
-	use({
-		"VonHeikemen/lsp-zero.nvim",
-		branch = "v1.x",
-		requires = { -- LSP Support
-			{ "neovim/nvim-lspconfig" }, -- Required
-			{ "williamboman/mason.nvim" }, -- Optional
-			{ "williamboman/mason-lspconfig.nvim" }, -- Optional
-			-- Autocompletion
-			{ "hrsh7th/nvim-cmp" }, -- Required
-			{ "hrsh7th/cmp-nvim-lsp" }, -- Required
-			{ "hrsh7th/cmp-buffer" }, -- Optional
-			{ "hrsh7th/cmp-path" }, -- Optional
-			{ "saadparwaiz1/cmp_luasnip" }, -- Optional
-			{ "hrsh7th/cmp-nvim-lua" }, -- Optional
-			-- Snippets
-			{ "L3MON4D3/LuaSnip" }, -- Required
-			{ "rafamadriz/friendly-snippets" }, -- Optional
-		},
-	})
-	-- Deug-------------------------------------------------------------------
-	-- use({
-	--     "rcarriga/nvim-dap-ui",
-	--     requires = {"mfussenegger/nvim-dap"},
-	--     config = "require('plugins.configs.dapui')"
-	-- })
-	-- use({
-	--     "leoluz/nvim-dap-go",
-	--     ft = {"go"},
-	--     config = function()
-	--         require("dap-go").setup()
-	--     end
-	-- })
+    -- lsp allinone------------------------------------------------------------
+    -- use({
+    --     "VonHeikemen/lsp-zero.nvim",
+    --     branch = "v1.x",
+    --     requires = { -- LSP Support
+    --     {"neovim/nvim-lspconfig"}, -- Required
+    --     {"williamboman/mason.nvim"}, -- Optional
+    --     {"williamboman/mason-lspconfig.nvim"}, -- Optional
+    --     -- Autocompletion
+    --     {"hrsh7th/nvim-cmp"}, -- Required
+    --     {"hrsh7th/cmp-nvim-lsp"}, -- Required
+    --     {"hrsh7th/cmp-buffer"}, -- Optional
+    --     {"hrsh7th/cmp-path"}, -- Optional
+    --     {"saadparwaiz1/cmp_luasnip"}, -- Optional
+    --     {"hrsh7th/cmp-nvim-lua"}, -- Optional
+    --     -- Snippets
+    --     {"L3MON4D3/LuaSnip"}, -- Required
+    --     {"rafamadriz/friendly-snippets"} -- Optional
+    --     }
+    -- })
+    -- Deug-------------------------------------------------------------------
+    -- use({
+    --     "rcarriga/nvim-dap-ui",
+    --     requires = {"mfussenegger/nvim-dap"},
+    --     config = "require('plugins.configs.dapui')"
+    -- })
+    -- use({
+    --     "leoluz/nvim-dap-go",
+    --     ft = {"go"},
+    --     config = function()
+    --         require("dap-go").setup()
+    --     end
+    -- })
 
-	-- Treesitter
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
-	})
-	use({
-		"windwp/nvim-ts-autotag",
-		after = "nvim-treesitter",
-	}) -- autoclose tags
-	use("nvim-treesitter/nvim-treesitter-textobjects")
-	use({
-		"andymass/vim-matchup",
-		setup = function()
-			vim.g.matchup_matchparen_offscreen = { method = "popup" }
-		end,
-	})
-	use("nvim-treesitter/playground")
-	use("RRethy/vim-illuminate")
+    -- Treesitter
+    use({
+        "nvim-treesitter/nvim-treesitter",
+        run = ":TSUpdate"
+    })
+    use({
+        "windwp/nvim-ts-autotag",
+        after = "nvim-treesitter"
+    }) -- autoclose tags
+    use("nvim-treesitter/nvim-treesitter-textobjects")
+    use({
+        "andymass/vim-matchup",
+        setup = function()
+            vim.g.matchup_matchparen_offscreen = {
+                method = "popup"
+            }
+        end
+    })
+    use("nvim-treesitter/playground")
+    use("RRethy/vim-illuminate")
 
-	use("numToStr/Comment.nvim")
-	use("JoosepAlviste/nvim-ts-context-commentstring")
+    use("numToStr/Comment.nvim")
+    use("JoosepAlviste/nvim-ts-context-commentstring")
 
-	-- History modification record----------------------
-	use({ "mbbill/undotree" })
+    -- History modification record----------------------
+    use({"mbbill/undotree"})
 
-	--git------------------------------------------------
-	use({
-		"kdheepak/lazygit.nvim",
-		cmd = "LazyGit",
-	})
-	use({ "lewis6991/gitsigns.nvim" })
-	-- use({
-	-- 	"f-person/git-blame.nvim",
-	-- 	event = "BufRead",
-	-- 	config = function()
-	-- 		vim.cmd("highlight default link gitblame SpecialComment")
-	-- 		vim.g.gitblame_enabled = 1
-	-- 	end,
-	-- })
-	use({
-		"sindrets/diffview.nvim",
-		cmd = {
-			"DiffviewOpen",
-			"DiffviewClose",
-			"DiffviewRefresh",
-			"DiffviewFocusFiles",
-			"DiffviewToggleFiles",
-			"DiffviewFileHistory",
-		},
-	})
-	-- telescope-----------------------------------------
-	use({
-		"nvim-telescope/telescope-fzf-native.nvim",
-		run = "make",
-	})
-	use("nvim-telescope/telescope-media-files.nvim")
-	use({
-		"nvim-telescope/telescope.nvim",
-		cmd = "Telescope",
-	})
+    -- git------------------------------------------------
+    use({
+        "kdheepak/lazygit.nvim",
+        cmd = "LazyGit"
+    })
+    use({"lewis6991/gitsigns.nvim"})
+    -- use({
+    -- 	"f-person/git-blame.nvim",
+    -- 	event = "BufRead",
+    -- 	config = function()
+    -- 		vim.cmd("highlight default link gitblame SpecialComment")
+    -- 		vim.g.gitblame_enabled = 1
+    -- 	end,
+    -- })
+    use({
+        "sindrets/diffview.nvim",
+        cmd = {"DiffviewOpen", "DiffviewClose", "DiffviewRefresh", "DiffviewFocusFiles", "DiffviewToggleFiles",
+               "DiffviewFileHistory"}
+    })
+    -- telescope-----------------------------------------
+    use({
+        "nvim-telescope/telescope-fzf-native.nvim",
+        run = "make"
+    })
+    use("nvim-telescope/telescope-media-files.nvim")
+    use({
+        "nvim-telescope/telescope.nvim",
+        cmd = "Telescope"
+    })
 
-	if packer_bootstrap then
-		require("packer").sync()
-	end
+    if packer_bootstrap then
+        require("packer").sync()
+    end
 end)
