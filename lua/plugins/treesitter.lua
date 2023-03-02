@@ -8,18 +8,19 @@ treesitter.setup({
 	-- :TSInstallInfo 命令查看支持的语言
 	-- ensure_installed = "all",
 	ensure_installed = {
+		"lua",
+		"tsx",
 		"html",
+		"json",
 		"go",
 		"help",
 		"css",
-		"rust",
 		"vim",
-		"lua",
 		"javascript",
 		"typescript",
-		"tsx",
 		"python",
 		"markdown",
+		"markdown_inline",
 		"toml",
 		"sql",
 	},
@@ -32,6 +33,10 @@ treesitter.setup({
 		enable = true, -- mandatory, false will disable the whole extension
 		disable = { "c", "ruby" }, -- optional, list of language that will be disabled
 		-- [options]
+	},
+	indent = {
+		enable = true,
+		disable = { "" },
 	},
 	-- 启用代码高亮功能
 	highlight = {
@@ -92,10 +97,6 @@ treesitter.setup({
 				["<leader>A"] = "@parameter.inner",
 			},
 		},
-	},
-	indent = {
-		enable = true,
-		disable = { "" },
 	},
 	-- p00f/nvim-ts-rainbow
 	rainbow = {

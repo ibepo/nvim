@@ -1,30 +1,9 @@
--- import mason plugin safely
-local mason_status, mason = pcall(require, "mason")
-if not mason_status then
-    return
-end
-
--- import mason-lspconfig plugin safely
-local mason_lspconfig_status, mason_lspconfig = pcall(require, "mason-lspconfig")
-if not mason_lspconfig_status then
-    return
-end
-
--- import mason-null-ls plugin safely
-local mason_null_ls_status, mason_null_ls = pcall(require, "mason-null-ls")
-if not mason_null_ls_status then
-    return
-end
+local mason = require("mason")
+local mason_lspconfig = require("mason-lspconfig")
+local mason_null_ls = require("mason-null-ls")
 
 -- enable mason
 mason.setup({
-    ui = {
-        icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗"
-        }
-    },
     keymaps = {
         -- Keymap to expand a package
         toggle_package_expand = "<CR>",
@@ -47,21 +26,39 @@ mason.setup({
     }
 })
 
+local servers = {"pyright", "pylsp", "tsserver", "html", "cssls", "tailwindcss", "lua_ls", "emmet_ls", "clangd"}
+
 -- 默认安装的语言服务器
 mason_lspconfig.setup({
-    -- list of servers for mason to install
-    ensure_installed = {"pyright", "tsserver", "html", "cssls", "tailwindcss", "lua_ls", "emmet_ls", "clangd"},
-    -- auto-install configured servers (with lspconfig)
-    automatic_installation = true -- not the same as ensure_installed
+    ensure_installed = servers,
+    automatic_installation = true
 })
 
+-- 我们需要调用lspconfig来将服务器传递给本机neovim lspconfig
+local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
+if not lspconfig_status_ok then
+    return
+end
+
+local opts = {}
+for _, server in pairs(servers) do
+    opts = {
+        -- getting "on_attach" and capabilities from handlers
+        on_attach = require("plugins.lsp.basic.handlers").on_attach,
+        capabilities = require("plugins.lsp.basic.handlers").capabilities
+    }
+    -- get the server name
+    server = vim.split(server, "@")[1]
+    -- pass them to lspconfig
+    lspconfig[server].setup(opts)
+end
+
 -- 默认安装的null-ls服务器
+-- list of formatters & linters for mason to install
 mason_null_ls.setup({
-    -- list of formatters & linters for mason to install
     ensure_installed = {"prettier", -- ts/js formatter
     "stylua", -- lua formatter
     "eslint_d" -- ts/js linter
     },
-    -- auto-install configured formatters & linters (with null-ls)
     automatic_installation = true
 })

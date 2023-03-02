@@ -69,17 +69,7 @@ return require("packer").startup(function(use)
     use({"windwp/nvim-autopairs"}) -- auto closing
     use("nacro90/numb.nvim")
     use("norcalli/nvim-colorizer.lua")
-    -- Lua
-    use {
-        "folke/zen-mode.nvim",
-        config = function()
-            require("zen-mode").setup {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            }
-        end
-    }
+    use({"stevearc/dressing.nvim"})
     -- use 'machakann/vim-highlightedyank'
     -- use "tpope/vim-surround"
     -- use "tpope/vim-repeat"
@@ -98,17 +88,17 @@ return require("packer").startup(function(use)
     use("rafamadriz/friendly-snippets") -- useful snippets
 
     -- LSP-------------------------------------------------------------
-    -- managing & installing lsp servers, linters & formatters
+    use("neovim/nvim-lspconfig") ---enable LSP
     use({"williamboman/mason.nvim"})
     use({"williamboman/mason-lspconfig.nvim"}) -- bridges gap b/w mason & lspconfig
-    -- configuring lsp servers
-    use("neovim/nvim-lspconfig")
+    use({"jose-elias-alvarez/null-ls.nvim"}) -- formatting & linting
+    use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
+
+    -- LSP Enhancement---------------------------------------------------------
     use({
         "glepnir/lspsaga.nvim",
         branch = "main"
-    }) -- A light-weight LSP plugin based on Neovim built-in LSP with highly a performant UI
-
-    -- LSP Enhancement---------------------------------------------------------
+    })
     use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
     use({"j-hui/fidget.nvim"})
     use({"folke/trouble.nvim"})
@@ -120,10 +110,6 @@ return require("packer").startup(function(use)
             require("lsp-rooter").setup({})
         end
     })
-
-    -- formatting & linting----------------------------------------------------
-    use({"jose-elias-alvarez/null-ls.nvim"})
-    use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
 
     -- language servers--------------------------------------------------------
     -- use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
