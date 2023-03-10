@@ -5,3 +5,5 @@ require("numb").setup({
 	number_only = false, -- Peek only when the command is only a number instead of when it starts with a number
 	centered_peeking = true, -- Peeked line will be centered relative to window
 })
+
+require("mini.align").setup()

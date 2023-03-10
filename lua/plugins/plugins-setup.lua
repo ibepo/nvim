@@ -70,10 +70,10 @@ return require("packer").startup(function(use)
     use("nacro90/numb.nvim")
     use("norcalli/nvim-colorizer.lua")
     use({"stevearc/dressing.nvim"})
+    use("echasnovski/mini.align")
     -- use 'machakann/vim-highlightedyank'
     -- use "tpope/vim-surround"
     -- use "tpope/vim-repeat"
-
     -- cmp--------------------------------------------------------------
     use("hrsh7th/nvim-cmp") -- completion plugin
     use("hrsh7th/cmp-buffer") -- source for text in buffer
@@ -195,16 +195,28 @@ return require("packer").startup(function(use)
         cmd = {"DiffviewOpen", "DiffviewClose", "DiffviewRefresh", "DiffviewFocusFiles", "DiffviewToggleFiles",
                "DiffviewFileHistory"}
     })
-    -- telescope-----------------------------------------
+    -- 🔭Telescope-----------------------
+    use "nvim-telescope/telescope.nvim"
+    -- Telescope Extensions
     use({
         "nvim-telescope/telescope-fzf-native.nvim",
         run = "make"
     })
     use("nvim-telescope/telescope-media-files.nvim")
-    use({
-        "nvim-telescope/telescope.nvim",
-        cmd = "Telescope"
-    })
+    use "cljoly/telescope-repo.nvim"
+    use {"nvim-telescope/telescope-file-browser.nvim"}
+    use {"nvim-telescope/telescope-ui-select.nvim"}
+    use "dhruvmanila/telescope-bookmarks.nvim"
+    use "nvim-telescope/telescope-github.nvim"
+    -- Trying command palette
+    use {"LinArcX/telescope-command-palette.nvim"}
+    use {
+        "AckslD/nvim-neoclip.lua",
+        config = function()
+            require("neoclip").setup()
+        end
+    }
+    use "jvgrootveld/telescope-zoxide"
 
     if packer_bootstrap then
         require("packer").sync()
